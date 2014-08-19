@@ -15,12 +15,13 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/pilu/fresh/runner"
+	"github.com/mbinette/fresh/runner"
 	"os"
 )
 
 func main() {
 	configPath := flag.String("c", "", "config file path")
+	doGet := flag.Bool("get", false, "go get dependencies before build")
 	flag.Parse()
 
 	if *configPath != "" {
@@ -30,6 +31,10 @@ func main() {
 		} else {
 			os.Setenv("RUNNER_CONFIG_PATH", *configPath)
 		}
+	}
+
+	if *doGet {
+		os.Setenv("RUNNER_DO_GET", "true")
 	}
 
 	runner.Start()

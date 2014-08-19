@@ -19,6 +19,7 @@ var settings = map[string]string{
 	"config_path":       "./runner.conf",
 	"root":              ".",
 	"tmp_path":          "./tmp",
+	"do_get":            "false",
 	"build_name":        "runner-build",
 	"build_log":         "runner-build-errors.log",
 	"valid_ext":         ".go, .tpl, .tmpl, .html",
@@ -110,6 +111,12 @@ func root() string {
 
 func tmpPath() string {
 	return settings["tmp_path"]
+}
+
+func doGet() bool {
+	value, _ := strconv.ParseBool(settings["do_get"])
+
+	return value
 }
 
 func buildName() string {
