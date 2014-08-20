@@ -55,18 +55,12 @@ func start() {
 				mainLog(err.Error())
 			}
 
-			if doGet() {
-				errorMessage, ok := get()
-				if ok {
-					settings["do_get"] = "false"
-				} else {
-					mainLog("Get Failed: \n %s", errorMessage)
-				}
-			} else {
-				mainLog("Skipping get")
+			errorMessage, ok := get()
+			if !ok {
+				mainLog("Get Failed: \n %s", errorMessage)
 			}
 
-			errorMessage, ok := build()
+			errorMessage, ok = build()
 			if !ok {
 				mainLog("Build Failed: \n %s", errorMessage)
 				if !started {
